@@ -24,6 +24,31 @@
 .premium-qr-info{padding:13px 13px 15px;display:flex;flex-direction:column;flex:1}.premium-qr-info>b{font-size:19px;line-height:1.18}.premium-qr-info .muted{font-size:13px;margin-top:6px}.premium-qr-info .price{margin-top:auto;padding-top:11px}
 @media(max-width:420px){.premium-qr-photo{height:138px}.premium-qr-product{min-height:258px!important}.premium-qr-info>b{font-size:18px}}
 </style>
+
+<style id="remove-menu-image-circle">
+/* Customer menu: remove the decorative circular badge/overlay at the top-right of item images. */
+.item-img-wrap::before,
+.item-img-wrap::after,
+.item-image-wrap::before,
+.item-image-wrap::after,
+.menu-img::before,
+.menu-img::after,
+.product-img::before,
+.product-img::after,
+.item-card .image-badge,
+.item-card .img-badge,
+.item-card .photo-badge,
+.item-card .image-dot,
+.item-card .img-dot,
+.item-card .item-dot,
+.card .image-badge,
+.card .img-badge,
+.card .photo-badge {
+  display: none !important;
+  content: none !important;
+}
+</style>
+
 </head><body><div id="loader" class="loader">Loading menu…</div><header class="top"><div class="brand"><img id="logo"><div><b id="rn">Lucky Bowl</b><div class="muted">Self Ordering</div></div><div class="brand-actions"><span id="tn" class="table">TABLE</span><button class="myorderstop" onclick="openMyOrders()" aria-label="Open my orders"><span class="ordersicon">☰</span><span class="orderscopy">My Orders</span></button><button class="carttop" onclick="openCart()" aria-label="Open cart"><span class="carticon">🛒</span><span class="cartcopy"><span class="cartlabel">Cart</span><span id="ct" class="cartamount">RM 0.00</span></span><span id="cc" class="cartbadge">0</span></button></div></div></header><main id="app" class="wrap"></main><div id="sheet" class="sheet"><div class="panel"><div id="panel" class="panelin"></div></div></div><div id="customerDialog" class="customer-dialog"><div id="customerDialogCard" class="customer-dialog-card"></div></div><div id="submitOverlay" class="submit-overlay"><div id="submitCard" class="submit-card"></div></div>
 <script id="lucky-github-api-bridge">
 /*
