@@ -1,0 +1,277 @@
+<!doctype html><html><head><base target="_top"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><title>Lucky Bowl · Order</title><style>
+*{box-sizing:border-box}body{margin:0;font-family:Inter,Segoe UI,Arial,sans-serif;background:#f6f7f9;color:#101828}.top{position:sticky;top:0;z-index:20;background:rgba(255,255,255,.94);backdrop-filter:blur(18px);border-bottom:1px solid #eaecf0;padding:12px 16px}.brand{max-width:760px;margin:auto;display:flex;align-items:center;gap:12px}.brand img{width:50px;height:50px;object-fit:contain}.brand b{font-size:18px}.table{background:#101828;color:#fff;border-radius:999px;padding:9px 12px;font-size:12px;font-weight:900;white-space:nowrap}.wrap{max-width:760px;margin:auto;padding:18px 14px 36px}.hero{background:linear-gradient(135deg,#0b1220,#26324d);color:#fff;border-radius:24px;padding:22px;margin-bottom:16px;box-shadow:0 18px 50px #10182822}.hero h1{margin:0;font-size:27px}.hero p{color:#cbd5e1;margin:7px 0 0}.search{width:100%;border:1px solid #d0d5dd;border-radius:15px;padding:14px 16px;font-size:16px;background:#fff}.cats{display:flex;gap:8px;overflow:auto;padding:13px 0}.chip{border:1px solid #e4e7ec;background:#fff;border-radius:999px;padding:10px 14px;white-space:nowrap;font-weight:850}.chip.on{background:#101828;color:#fff}.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:11px}.item{background:#fff;border:1px solid #eaecf0;border-radius:18px;padding:16px;min-height:132px;display:flex;flex-direction:column;box-shadow:0 8px 25px #10182808}.item b{font-size:16px}.price{margin-top:auto;font-size:18px;font-weight:950}.add{float:right;border:0;width:34px;height:34px;border-radius:50%;background:#101828;color:#fff;font-size:22px}.bar{position:fixed;left:0;right:0;bottom:0;background:rgba(255,255,255,.96);backdrop-filter:blur(18px);border-top:1px solid #e4e7ec;padding:12px 14px;z-index:30}.barin{max-width:760px;margin:auto}.cartbtn{width:100%;border:0;border-radius:16px;background:#101828;color:#fff;padding:16px;font-weight:950;font-size:16px;display:flex;justify-content:space-between}.sheet{position:fixed;inset:0;background:#10182899;display:none;align-items:end;z-index:50}.sheet.on{display:flex}.panel{width:100%;max-height:88vh;overflow:auto;background:#fff;border-radius:25px 25px 0 0;padding:20px 18px 32px}.panelin{max-width:760px;margin:auto}.x{float:right;border:0;background:#f2f4f7;border-radius:50%;width:38px;height:38px}.group{border:1px solid #e4e7ec;border-radius:18px;padding:14px;margin:13px 0}.firstgroup{border:1.5px solid #b2ddff;background:linear-gradient(180deg,#f5fbff,#fff);box-shadow:0 10px 28px rgba(23,92,211,.07)}.stepbadge{float:right;background:#fff1f3;color:#c01048;border-radius:999px;padding:5px 9px;font-size:10px;font-weight:950}.firstopts{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px;margin-top:12px}.firstopt{position:relative;border:1.5px solid #d0d5dd;border-radius:14px;padding:13px;min-height:76px;cursor:pointer;background:#fff}.firstopt.on{border-color:#175cd3;background:#eff8ff;box-shadow:inset 0 0 0 1px #175cd3}.firstopt input{position:absolute;opacity:0}.firstopt b{display:block}.firstopt small{display:block;color:#667085;margin-top:7px}.firstopt.on:after{content:'✓';position:absolute;right:9px;top:9px;width:21px;height:21px;border-radius:50%;background:#175cd3;color:#fff;display:grid;place-items:center;font-size:11px;font-weight:950}.opt{display:flex;align-items:center;gap:10px;padding:11px 4px;border-top:1px solid #f2f4f7}.opt:first-of-type{border-top:0}.opt input{width:20px;height:20px}.qty{display:flex;align-items:center;gap:14px;margin:16px 0}.qty button{width:46px;height:46px;border:1px solid #d0d5dd;background:#fff;border-radius:13px;font-size:22px}.primary{width:100%;border:0;background:#101828;color:#fff;border-radius:15px;padding:15px;font-weight:950}.cartline{padding:13px 0;border-bottom:1px solid #eaecf0}.muted{color:#667085;font-size:12px}.success{text-align:center;padding:35px 10px}.tick{width:74px;height:74px;border-radius:50%;display:grid;place-items:center;background:#ecfdf3;color:#039855;font-size:36px;margin:auto}.orders{margin-top:22px}.ordercard{background:#fff;border:1px solid #e4e7ec;border-radius:18px;padding:15px;margin:10px 0}.closed{padding:60px 20px;text-align:center}.loader{position:fixed;inset:0;background:#fff;z-index:100;display:grid;place-items:center;font-weight:900}@media(min-width:650px){.grid{grid-template-columns:repeat(3,1fr)}.panel{border-radius:25px 25px 0 0}}
+/* V2.1 PRESTIGE MOBILE */ html,body{width:100%;min-height:100%;overflow-x:hidden}body{font-size:16px}.brand,.wrap,.barin,.panelin{width:100%;max-width:980px}.wrap{padding-left:clamp(14px,4vw,28px);padding-right:clamp(14px,4vw,28px)}.hero{padding:clamp(20px,5vw,34px)}.hero h1{font-size:clamp(26px,7vw,38px);line-height:1.05}.hero p{font-size:clamp(13px,3.6vw,16px);line-height:1.55}.search{min-height:54px}.chip{min-height:46px}.grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:clamp(10px,3vw,16px)}.item{min-height:clamp(145px,38vw,190px);padding:clamp(15px,4vw,22px)}.item b{font-size:clamp(16px,4.4vw,20px)}.price{font-size:clamp(18px,5vw,22px)}.panel{max-height:92dvh;padding:22px clamp(16px,4vw,28px) max(34px,env(safe-area-inset-bottom))}.group{padding:clamp(14px,4vw,20px)}.firstopt{min-height:92px}.opt{min-height:56px}.primary,.cartbtn{min-height:56px;font-size:16px}.bar{padding-bottom:max(12px,env(safe-area-inset-bottom))}.customer-dialog,.submit-overlay{position:fixed;inset:0;z-index:130;background:rgba(7,12,22,.70);backdrop-filter:blur(16px);display:none;align-items:center;justify-content:center;padding:22px}.customer-dialog.on,.submit-overlay.on{display:flex}.customer-dialog-card,.submit-card{width:min(92vw,460px);background:linear-gradient(180deg,#fff,#fbfcfe);border-radius:30px;padding:32px 26px;box-shadow:0 40px 120px rgba(0,0,0,.38);text-align:center}.dialog-icon{width:72px;height:72px;border-radius:50%;display:grid;place-items:center;margin:0 auto 17px;background:#fffaeb;color:#dc6803;font-size:30px;font-weight:950}.dialog-actions{margin-top:22px}.dialog-actions button{width:100%;min-height:52px;border:0;border-radius:14px;font-weight:900;background:#101828;color:#fff}.submit-card .tick{width:86px;height:86px;font-size:42px;box-shadow:0 0 0 12px #ecfdf377}.submit-card h2{font-size:28px;margin:24px 0 8px}.submit-poem{font-family:Georgia,serif;font-size:18px;font-style:italic;color:#475467;line-height:1.65;margin:16px auto 26px;max-width:340px}@media(max-width:380px){.wrap{padding-left:12px;padding-right:12px}.item{min-height:138px;padding:13px}.firstopts{grid-template-columns:1fr}.hero h1{font-size:25px}}@media(min-width:540px){.grid{grid-template-columns:repeat(3,minmax(0,1fr))}.firstopts{grid-template-columns:repeat(3,minmax(0,1fr))}}@media(min-width:900px){.grid{grid-template-columns:repeat(4,minmax(0,1fr))}}
+/* V2.4.2 PRESTIGE TOP-RIGHT CART */
+.brand{position:relative}.brand-actions{margin-left:auto;display:flex;align-items:center;gap:8px}.carttop{position:relative;border:1px solid #d0d5dd;background:#fff;color:#101828;border-radius:14px;min-height:42px;padding:8px 12px;display:flex;align-items:center;gap:8px;font-weight:950;box-shadow:0 6px 18px rgba(16,24,40,.08);cursor:pointer;transition:.18s ease}.carttop:active{transform:scale(.97)}.carticon{font-size:18px;line-height:1}.cartcopy{display:flex;flex-direction:column;align-items:flex-start;line-height:1.05}.cartlabel{font-size:10px;color:#667085;text-transform:uppercase;letter-spacing:.06em}.cartamount{font-size:13px;margin-top:3px}.cartbadge{position:absolute;right:-6px;top:-7px;min-width:21px;height:21px;padding:0 5px;border-radius:999px;background:#175cd3;color:#fff;border:2px solid #fff;display:grid;place-items:center;font-size:10px;font-weight:950}.bar{display:none!important}@media(max-width:430px){.top{padding:10px 11px}.brand{gap:8px}.brand img{width:42px;height:42px}.brand b{font-size:15px}.brand .muted{font-size:10px}.brand-actions{gap:6px}.table{padding:8px 9px;font-size:10px}.carttop{min-height:40px;padding:7px 9px;border-radius:12px}.carticon{font-size:17px}.cartlabel{display:none}.cartamount{font-size:12px;margin-top:0}.cartbadge{right:-5px;top:-6px}}@media(max-width:350px){.brand img{width:38px;height:38px}.brand b{font-size:14px}.table{display:none}.carttop{padding:7px 10px}}
+
+/* V2.5 PRESTIGE LARGE-TOUCH QR */
+.grid{grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:14px}.item{min-height:172px;padding:20px;border-radius:22px}.item b{font-size:clamp(18px,4.8vw,22px);line-height:1.25}.item .muted{font-size:13px;line-height:1.4}.add{width:42px;height:42px;font-size:26px}.firstopts{grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:12px}.firstopt{min-height:112px;padding:17px;border-radius:18px}.firstopt b{font-size:17px;line-height:1.25}.firstopt small{font-size:13px}.opt{min-height:66px;font-size:16px}.promo{overflow:hidden;background:#fff;border:1px solid #e4e7ec;border-radius:24px;margin:0 0 17px;box-shadow:0 12px 34px rgba(16,24,40,.08)}.promo img{width:100%;max-height:260px;object-fit:cover;display:block}.promo-copy{padding:18px 20px}.promo-kicker{font-size:10px;font-weight:950;letter-spacing:.12em;color:#175cd3;text-transform:uppercase}.promo h2{font-size:22px;margin:6px 0 6px}.promo p{font-size:14px;line-height:1.55;margin:0;color:#667085}@media(max-width:360px){.grid,.firstopts{gap:9px}.item{min-height:155px;padding:14px}.item b{font-size:17px}.firstopt{min-height:100px;padding:13px}.firstopt b{font-size:15px}}@media(min-width:900px){.grid{grid-template-columns:repeat(3,minmax(0,1fr))!important}.firstopts{grid-template-columns:repeat(3,minmax(0,1fr))!important}}
+</style><style id="v295-perfect-cart-editor">
+.customer-edit-card{position:relative;padding:10px 12px 14px!important;border-radius:22px!important}
+.customer-cart-edit-button{display:block;width:100%;border:0;background:transparent;padding:8px 4px 10px;color:inherit;font:inherit;text-align:left;cursor:pointer;border-radius:16px}
+.customer-cart-edit-button:active{background:#f2f4f7;transform:scale(.99)}
+.customer-cart-edit-button .cart-line-total{font-size:18px;font-weight:950;white-space:nowrap}
+.tap-edit-customer{display:flex;align-items:center;gap:7px;margin-top:10px;font-size:15px;font-weight:900;color:#344054}
+.tap-edit-customer span{display:inline-grid;place-items:center;width:28px;height:28px;border-radius:9px;background:#eef2f6;color:#101828}
+.customer-remove{margin-top:4px!important}
+</style>
+<style id="v300-prestige-product-gallery">
+.premium-qr-product{padding:0!important;overflow:hidden!important;display:flex!important;flex-direction:column!important;min-height:272px!important}
+.premium-qr-photo{height:148px;position:relative;overflow:hidden;background:linear-gradient(145deg,#f2f4f7,#e4e7ec);display:grid;place-items:center}
+.premium-qr-photo img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:1}
+.premium-qr-placeholder{font-size:40px;color:#98a2b3;opacity:.55}.premium-qr-photo:has(img) .premium-qr-placeholder{display:none}.premium-qr-photo.photo-error .premium-qr-placeholder{display:block}
+.premium-qr-photo .add{position:absolute!important;right:10px!important;top:10px!important;z-index:3;background:rgba(255,255,255,.96)!important;box-shadow:0 5px 16px rgba(16,24,40,.14)!important}
+.premium-qr-info{padding:13px 13px 15px;display:flex;flex-direction:column;flex:1}.premium-qr-info>b{font-size:19px;line-height:1.18}.premium-qr-info .muted{font-size:13px;margin-top:6px}.premium-qr-info .price{margin-top:auto;padding-top:11px}
+@media(max-width:420px){.premium-qr-photo{height:138px}.premium-qr-product{min-height:258px!important}.premium-qr-info>b{font-size:18px}}
+</style>
+</head><body><div id="loader" class="loader">Loading menu…</div><header class="top"><div class="brand"><img id="logo"><div><b id="rn">Lucky Bowl</b><div class="muted">Self Ordering</div></div><div class="brand-actions"><span id="tn" class="table">TABLE</span><button class="myorderstop" onclick="openMyOrders()" aria-label="Open my orders"><span class="ordersicon">☰</span><span class="orderscopy">My Orders</span></button><button class="carttop" onclick="openCart()" aria-label="Open cart"><span class="carticon">🛒</span><span class="cartcopy"><span class="cartlabel">Cart</span><span id="ct" class="cartamount">RM 0.00</span></span><span id="cc" class="cartbadge">0</span></button></div></div></header><main id="app" class="wrap"></main><div id="sheet" class="sheet"><div class="panel"><div id="panel" class="panelin"></div></div></div><div id="customerDialog" class="customer-dialog"><div id="customerDialogCard" class="customer-dialog-card"></div></div><div id="submitOverlay" class="submit-overlay"><div id="submitCard" class="submit-card"></div></div>
+<script id="lucky-github-api-bridge">
+/*
+  LUCKY POS GitHub -> Google Apps Script bridge.
+  AFTER deploying Code.gs as a new Web App version, replace the value below
+  with the deployment's /exec URL in BOTH index.html and customer.html.
+*/
+const LUCKY_API_URL = 'https://script.google.com/macros/s/AKfycbxPvz2iERpCPOp57zcL5wHL-Hb9KR_achpVuDqZv4MQocgoPnW8YBBqxRKUnq9jIjAw/exec';
+
+(function(){
+  function invoke(fn,args,success,failure){
+    if(!LUCKY_API_URL || LUCKY_API_URL.indexOf('PASTE_')===0){
+      const e=new Error('LUCKY API URL has not been configured yet.');
+      if(failure) failure(e);
+      return;
+    }
+    fetch(LUCKY_API_URL,{
+      method:'POST',
+      redirect:'follow',
+      headers:{'Content-Type':'text/plain;charset=utf-8'},
+      body:JSON.stringify({api:'pos',fn:String(fn||''),args:Array.isArray(args)?args:[]})
+    })
+    .then(r=>r.text())
+    .then(t=>{
+      let data;
+      try{ data=JSON.parse(t); }
+      catch(_){ throw new Error('Server returned an invalid response.'); }
+      if(!data || data.ok!==true) throw new Error((data&&data.error)||'LUCKY POS API request failed.');
+      if(success) success(data.result);
+    })
+    .catch(err=>{ if(failure) failure(err); });
+  }
+
+  function runner(success,failure){
+    return new Proxy({},{
+      get(_target,prop){
+        if(prop==='withSuccessHandler') return cb=>runner(cb,failure);
+        if(prop==='withFailureHandler') return cb=>runner(success,cb);
+        return (...args)=>{
+          // Existing Staff POS uses google.script.run.apiCall('action',[args]).
+          // Unwrap that legacy dispatcher so the HTTP backend receives the real action.
+          if(prop==='apiCall'){
+            const action=args[0];
+            const actionArgs=Array.isArray(args[1])?args[1]:[];
+            return invoke(action,actionArgs,success,failure);
+          }
+          return invoke(prop,args,success,failure);
+        };
+      }
+    });
+  }
+
+  window.google = window.google || {};
+  window.google.script = window.google.script || {};
+  Object.defineProperty(window.google.script,'run',{
+    configurable:true,
+    get(){ return runner(null,null); }
+  });
+})();
+</script>
+
+<script>
+const __qp=new URLSearchParams(location.search),TABLE=__qp.get('table')||'',Q=__qp.get('q')||'';let D=null,cat='',cart=[],draft=null;const $=id=>document.getElementById(id),money=n=>Number(n||0).toFixed(2),esc=s=>String(s??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
+function customerNotice(title,message,kind='warning'){const box=$('customerDialog'),card=$('customerDialogCard'),icon=kind==='success'?'✓':kind==='error'?'×':'!';card.innerHTML=`<div class="dialog-icon" style="${kind==='success'?'background:#ecfdf3;color:#039855':kind==='error'?'background:#fef3f2;color:#d92d20':''}">${icon}</div><h2 style="margin:0 0 9px">${esc(title)}</h2><p class="muted" style="font-size:14px;line-height:1.6">${esc(message)}</p><div class="dialog-actions"><button onclick="customerDialog.classList.remove('on')">OK</button></div>`;box.classList.add('on')} function call(fn,args,ok){google.script.run.withSuccessHandler(ok).withFailureHandler(e=>{loader.style.display='none';customerNotice('Something Went Wrong',e.message||String(e),'error')})[fn](...args)}
+call('customerBootstrap',[TABLE,Q],d=>{D=d;loader.style.display='none';logo.src=d.restaurant.logo||'';rn.textContent=d.restaurant.name;tn.textContent=d.table.name;render()});
+function render(){const menuCats=D.menuCategories||D.categories||[];if(!cat&&menuCats.length)cat=menuCats[0].Category_ID;app.innerHTML=`<section class="hero"><h1>Order from your table</h1><p>${esc(D.table.name)} · Your order goes directly to our kitchen / bar.</p></section>${promoHtml()}<input class="search" id="search" placeholder="Search menu…" oninput="renderItems()"><div class="cats" id="cats"></div><div class="grid" id="grid"></div>`;renderCats();renderItems();syncCart()}
+function promoHtml(){const p=D.promotion||{};if(!p.enabled||(!p.title&&!p.text&&!p.imageUrl))return '';return `<section class="promo">${p.imageUrl?`<img src="${esc(p.imageUrl)}" alt="Promotion" onerror="this.style.display='none'">`:''}<div class="promo-copy"><div class="promo-kicker">Featured</div>${p.title?`<h2>${esc(p.title)}</h2>`:''}${p.text?`<p>${esc(p.text)}</p>`:''}</div></section>`}
+function renderCats(){const menuCats=D.menuCategories||D.categories||[];cats.innerHTML=menuCats.map(c=>`<button class="chip ${cat===c.Category_ID?'on':''}" onclick="pick('${c.Category_ID}')">${esc(c.Category_Name)}</button>`).join('')}
+function pick(c){cat=c;renderCats();renderItems()}
+function renderItems(){const q=String(($('search')||{}).value||'').toLowerCase();const a=D.items.filter(x=>x.Category_ID===cat&&(!q||String(x.Item_Name).toLowerCase().includes(q)));grid.innerHTML=a.map(x=>`<div class="item premium-qr-product" onclick="customize('${x.Item_ID}')">
+  <div class="premium-qr-photo">
+    ${x.Image_URL?`<img src="${esc(x.Image_URL)}" alt="${esc(x.Item_Name)}" loading="lazy" onerror="this.style.display='none';this.parentElement.classList.add('photo-error')">`:''}
+    <div class="premium-qr-placeholder">▧</div>
+    <button class="add">+</button>
+  </div>
+  <div class="premium-qr-info">
+    <b>${esc(x.Item_Name)}</b>
+    <div class="muted">Tap to customize</div>
+    <div class="price">RM ${money(x.Price)}</div>
+  </div>
+</div>`).join('')||'<div class="muted">No matching items.</div>'}
+function mapsFor(id){return D.itemGroups.filter(m=>m.Item_ID===id&&String(m.Active).toLowerCase()!=='false').sort((a,b)=>Number(a.Sort_Order)-Number(b.Sort_Order))}
+function firstChoiceCategoryIds(it){return String(it.First_Choice_Category_ID||'').split(',').map(x=>x.trim()).filter(Boolean)}
+function firstChoiceRules(it){let raw={};try{raw=JSON.parse(String(it.First_Choice_Rules||'{}'))||{}}catch(e){};return firstChoiceCategoryIds(it).map((cid,i)=>{const r=raw[cid]||raw[String(i+1)]||{};let min=Math.max(1,Number(r.min==null?1:r.min)||1),max=Math.max(1,Number(r.max==null?1:r.max)||1);if(max<min)max=min;return {categoryId:cid,min,max}})}
+function customize(id,editIndex=null){const it=D.items.find(x=>x.Item_ID===id);const editing=(Number.isInteger(editIndex)&&cart[editIndex])?cart[editIndex]:null;
+draft={it,qty:editing?Number(editing.quantity||1):1,mods:{},firstChoices:{},remark:editing?String(editing.remark||''):'',editIndex:editing?editIndex:null};
+if(editing)(editing.modifiers||[]).forEach(m=>{
+  if(m.kind==='FIRST_CHOICE'&&m.firstCategoryId)(draft.firstChoices[m.firstCategoryId]||(draft.firstChoices[m.firstCategoryId]=[])).push(String(m.id||'').replace(/^FIRST-/,''));
+  else (draft.mods[m.groupId]||(draft.mods[m.groupId]=[])).push(m.id);
+});const firstRules=firstChoiceRules(it),firstGroups=firstRules.map(rule=>({rule,cat:D.categories.find(c=>c.Category_ID===rule.categoryId),choices:D.items.filter(x=>x.Category_ID===rule.categoryId&&x.Item_ID!==it.Item_ID&&String(x.Active).toLowerCase()!=='false')})).filter(x=>x.cat&&x.choices.length);const gs=mapsFor(id).map(m=>D.groups.find(g=>g.Group_ID===m.Group_ID)).filter(Boolean);panel.innerHTML=`<button class="x" onclick="closeSheet()">×</button><h2>${esc(it.Item_Name)}</h2><div class="price">RM ${money(it.Price)}</div>${firstGroups.map((fg,i)=>firstGroupHtml(fg,i)).join('')}${gs.map(g=>groupHtml(g)).join('')}<div class="group"><b>Special Request</b><textarea id="remark" style="width:100%;margin-top:10px;border:1px solid #d0d5dd;border-radius:12px;padding:12px" rows="3" placeholder="e.g. less spicy">${esc(draft.remark||'')}</textarea></div><div class="qty"><button onclick="q(-1)">−</button><b id="qn">${draft.qty}</b><button onclick="q(1)">+</button></div><button class="primary" onclick="addDraft()">${editing?'Update Item':'Add to Cart'}</button>`;sheet.classList.add('on');if(editing)setTimeout(hydrateCustomerCartEditor,0)}
+function firstGroupHtml(fg,i){const cid=fg.cat.Category_ID,r=fg.rule;return `<div class="group firstgroup"><span class="stepbadge">STEP ${i+1} · REQUIRED</span><b>${esc(fg.cat.Category_Name)}</b><div class="muted">Choose at least ${r.min}${r.max?` · Up to ${r.max}`:''} · Tap again to remove</div><div class="firstopts">${fg.choices.map(o=>`<label class="firstopt"><input type="checkbox" onchange="firstMod('${cid}','${o.Item_ID}',this)"><b>${esc(o.Item_Name)}</b><small>Included</small></label>`).join('')}</div></div>`}
+function firstMod(cid,itemId,input){let a=draft.firstChoices[cid]||[],r=firstChoiceRules(draft.it).find(x=>x.categoryId===cid)||{min:1,max:1};if(input.checked&&r.max>0&&a.length>=r.max){input.checked=false;return customerNotice('Selection Limit','You can choose up to '+r.max+' option'+(r.max===1?'':'s')+' for this step.')}if(input.checked&&!a.includes(itemId))a.push(itemId);if(!input.checked)a=a.filter(x=>x!==itemId);draft.firstChoices[cid]=a;input.closest('.firstopt').classList.toggle('on',input.checked)}
+function groupHtml(g){const os=D.options.filter(o=>o.Group_ID===g.Group_ID&&String(o.Active).toLowerCase()!=='false');const single=String(g.Selection_Type).toUpperCase()==='SINGLE',required=g.Required===true||String(g.Required).toLowerCase()==='true';return `<div class="group addon-accordion" data-addon-group="${esc(g.Group_ID)}"><button type="button" class="addon-head" onclick="toggleAddonGroup(this)"><span class="addon-head-copy"><b>${esc(g.Group_Name)}</b><small>${required?'Required':'Optional'} · ${os.length} option${os.length===1?'':'s'}</small></span><span class="addon-chevron">⌄</span></button><div class="addon-body">${os.map(o=>`<label class="opt addon-opt"><input type="checkbox" name="g_${g.Group_ID}" value="${o.Option_ID}" data-option-id="${o.Option_ID}" onchange="modInput(this,'${g.Group_ID}','${o.Option_ID}',${single});refreshAddonSummary(this)"><span class="addon-option-name">${esc(o.Option_Name)}</span><span class="addon-option-price">${Number(o.Price||0)?'+ RM '+money(o.Price):'Included'}</span></label>`).join('')}</div></div>`}
+function toggleAddonGroup(btn){const box=btn.closest('.addon-accordion');if(box)box.classList.toggle('open')}
+function refreshAddonSummary(input){const box=input.closest('.addon-accordion');if(!box)return;const n=box.querySelectorAll('.addon-body input:checked').length;box.classList.toggle('has-selection',n>0);const small=box.querySelector('.addon-head small');if(small){const base=small.dataset.base||small.textContent.replace(/ · \d+ selected$/,'');small.dataset.base=base;small.textContent=base+(n?' · '+n+' selected':'')}}
+function modInput(input,g,o,single){
+  if(single&&input.checked){
+    const box=input.closest('.addon-body');
+    if(box)box.querySelectorAll('input[name="g_'+g+'"]').forEach(x=>{if(x!==input)x.checked=false});
+  }
+  mod(g,o,input.checked,single);
+  if(single){const box=input.closest('.addon-accordion');if(box)box.querySelectorAll('.addon-body input').forEach(x=>refreshAddonSummary(x))}
+}
+function mod(g,o,on,single){if(single)draft.mods[g]=on?[o]:[];else{let a=draft.mods[g]||[];if(on&&!a.includes(o))a.push(o);if(!on)a=a.filter(x=>x!==o);draft.mods[g]=a}}
+function q(n){draft.qty=Math.max(1,Math.min(20,draft.qty+n));qn.textContent=draft.qty}
+function hydrateCustomerCartEditor(){
+  if(!draft)return;
+  Object.entries(draft.firstChoices||{}).forEach(([cid,ids])=>{
+    (ids||[]).forEach(id=>{
+      const group=[...document.querySelectorAll('.firstgroup')].find(g=>g.querySelector(`input[onchange*="'${cid}'"]`));
+      if(group){const input=group.querySelector(`input[value="${id}"]`);if(input){input.checked=true;input.closest('.firstopt')?.classList.add('on')}}
+    });
+  });
+  Object.entries(draft.mods||{}).forEach(([gid,ids])=>{
+    (ids||[]).forEach(id=>{
+      const input=document.querySelector(`.addon-accordion[data-addon-group="${gid}"] input[data-option-id="${id}"]`);
+      if(input){input.checked=true;input.closest('.addon-accordion')?.classList.add('open');refreshAddonSummary(input)}
+    });
+  });
+  const r=document.getElementById('remark');if(r)r.value=draft.remark||'';
+  const q=document.getElementById('qn');if(q)q.textContent=draft.qty;
+}
+function editCustomerCartItem(i){
+  const x=cart[i];if(!x)return;
+  sheet.classList.remove('cartmode');
+  customize(x.itemId,i);
+}
+
+function addDraft(){draft.remark=String(($('remark')||{}).value||'');const mods=[];for(const [stepIndex,r] of firstChoiceRules(draft.it).entries()){const cid=r.categoryId,available=D.items.filter(x=>x.Category_ID===cid&&x.Item_ID!==draft.it.Item_ID&&String(x.Active).toLowerCase()!=='false');if(!available.length)continue;const chosen=draft.firstChoices[cid]||[],c=D.categories.find(x=>x.Category_ID===cid);if(chosen.length<r.min)return customerNotice('Step '+(stepIndex+1)+' Required','Please choose at least '+r.min+' '+(c?c.Category_Name:'option')+(r.min===1?'':' selections')+' before adding this item.');if(r.max>0&&chosen.length>r.max)return customerNotice('Step '+(stepIndex+1)+' Limit','Please choose no more than '+r.max+' option'+(r.max===1?'':'s')+'.');chosen.forEach(id=>{const x=D.items.find(z=>z.Item_ID===id);if(x)mods.push({id:'FIRST-'+x.Item_ID,name:x.Item_Name,price:0,groupId:'__FIRST_CHOICE__',kind:'FIRST_CHOICE',firstCategoryId:cid})})}Object.values(draft.mods).flat().forEach(id=>{const o=D.options.find(x=>x.Option_ID===id);if(o)mods.push({id:o.Option_ID,name:o.Option_Name,price:Number(o.Price||0),groupId:o.Group_ID})});const updated={itemId:draft.it.Item_ID,itemName:draft.it.Item_Name,price:Number(draft.it.Price),quantity:draft.qty,modifiers:mods,remark:draft.remark};
+const wasEditing=Number.isInteger(draft.editIndex);
+if(wasEditing)cart[draft.editIndex]=updated;else cart.push(updated);
+closeSheet();syncCart();if(wasEditing)openCart()}
+function closeSheet(){sheet.classList.remove('on','cartmode','ordermode')}
+function syncCart(){const n=cart.reduce((a,x)=>a+x.quantity,0),t=cart.reduce((a,x)=>a+(x.price+x.modifiers.reduce((s,m)=>s+m.price,0))*x.quantity,0);cc.textContent=n;ct.textContent='RM '+money(t)}
+function openCart(){
+  sheet.classList.remove('ordermode');sheet.classList.add('cartmode');
+  panel.innerHTML=`<div class="cart-modal-head"><div><div class="cart-kicker">YOUR ORDER</div><h2>Your Cart</h2><div class="cart-subtitle">Tap any item to edit your choices before sending.</div></div><button class="x" onclick="closeSheet()">×</button></div>${cart.length?cart.map((x,i)=>`<div class="cartline cartline-large customer-edit-card">
+    <button type="button" class="customer-cart-edit-button" onclick="editCustomerCartItem(${i})">
+      <div class="cart-row"><b>${x.quantity} × ${esc(x.itemName)}</b><div class="cart-line-total">RM ${money((x.price+x.modifiers.reduce((s,m)=>s+m.price,0))*x.quantity)}</div></div>
+      <div class="cart-mods">${x.modifiers.map(m=>esc(m.name)).join(' · ')||'No add-ons'}${x.remark?' · '+esc(x.remark):''}</div>
+      <div class="tap-edit-customer"><span>✎</span> Tap to edit</div>
+    </button>
+    <button type="button" class="remove-btn customer-remove" onclick="cart.splice(${i},1);openCart();syncCart()">Remove</button>
+  </div>`).join('')+'<button class="primary cart-submit" onclick="submit()">Submit Order to Kitchen</button>':'<div class="empty-cart">Your cart is empty.</div>'}`;
+  sheet.classList.add('on');
+}
+function openMyOrders(){
+  sheet.classList.remove('cartmode');sheet.classList.add('ordermode');
+  panel.innerHTML=`<div class="cart-modal-head"><div><div class="cart-kicker">ORDER HISTORY</div><h2>My Orders</h2><div class="cart-subtitle">Orders submitted from this table session.</div></div><button class="x" onclick="closeSheet()">×</button></div><div id="myorders"></div>`;
+  sheet.classList.add('on');renderOrders(D.myOrders||[]);
+}
+function submit(){if(!cart.length)return;const btn=panel.querySelector('.primary');btn.disabled=true;btn.textContent='Sending…';call('customerSubmitOrder',[TABLE,Q,D.sessionId,{items:cart}],r=>{cart=[];syncCart();D.myOrders=r.myOrders||[];closeSheet();submitCard.innerHTML=`<div class="tick">✓</div><h2>Order Submitted</h2><p class="muted" style="font-size:14px">${esc(r.orderNo)} has been sent successfully.</p><div class="submit-poem">Your order is in good hands.<br>Your food is on its way — made with care, just for your table.</div><button class="primary" onclick="submitOverlay.classList.remove('on')">Continue Ordering</button>`;submitOverlay.classList.add('on')})}
+function renderOrders(a){const el=$('myorders');if(!el)return;el.innerHTML=a.length?a.map(o=>`<div class="ordercard"><div style="display:flex;justify-content:space-between"><b>${esc(o.orderNo)}</b><span class="muted">${esc(o.status)}</span></div>${o.items.map(i=>`<div style="display:flex;justify-content:space-between;margin-top:10px"><span>${i.qty} × ${esc(i.name)}</span><b>RM ${money(i.lineTotal)}</b></div>`).join('')}<div style="border-top:1px solid #eaecf0;margin-top:12px;padding-top:10px;text-align:right;font-weight:950">RM ${money(o.total)}</div></div>`).join(''):'<div class="muted">No orders submitted yet.</div>'}
+setInterval(()=>{if(!D)return;call('customerMyOrders',[TABLE,Q,D.sessionId],r=>{if(r.closed){app.innerHTML='<div class="closed"><h1>Thank you</h1><p class="muted">This dining session has been closed after payment.</p></div>';bottom.style.display='none'}else{D.myOrders=r.orders||[];renderOrders(D.myOrders)}})},15000);
+</script></body></html><style>
+/* V2.5.1 LARGE MOBILE QR EXPERIENCE */
+@media (max-width: 820px){
+  .top{padding:14px 14px}.brand{gap:10px}.brand img{width:48px;height:48px}.brand b{font-size:17px}.brand .muted{font-size:11px}
+  .wrap{padding:20px 16px 42px}.hero{padding:26px 24px;border-radius:26px;margin-bottom:18px}.hero h1{font-size:32px}.hero p{font-size:15px}
+  .search{min-height:58px;padding:16px 17px;font-size:17px;border-radius:17px}.cats{gap:10px;padding:15px 0}.chip{min-height:50px;padding:13px 17px;font-size:15px}
+  .grid{grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:14px!important}
+  .item{min-height:190px!important;padding:20px!important;border-radius:23px!important}.item b{font-size:20px!important;line-height:1.28}.item .muted{font-size:14px!important;margin-top:8px}.price{font-size:21px!important}.add{width:46px;height:46px;font-size:27px}
+  .panel{padding:24px 18px max(38px,env(safe-area-inset-bottom))}.panel h2{font-size:25px}.group{padding:18px;border-radius:21px}.group>div:first-child b{font-size:19px}.group .muted{font-size:14px;line-height:1.45}
+  .firstopts{grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:13px!important}.firstopt{min-height:124px!important;padding:18px!important;border-radius:19px}.firstopt b{font-size:18px!important}.firstopt small{font-size:14px!important}
+  .opt{min-height:70px;font-size:17px}.opt input{width:24px;height:24px}.qty button{width:52px;height:52px}.primary{min-height:60px;font-size:18px}
+  .orders h2{font-size:23px}.ordercard{font-size:15px}
+}
+@media (max-width: 390px){
+  .wrap{padding-left:12px;padding-right:12px}.grid{gap:10px!important}.item{min-height:176px!important;padding:16px!important}.item b{font-size:18px!important}.price{font-size:19px!important}.add{width:42px;height:42px}.firstopts{gap:10px!important}.firstopt{min-height:112px!important;padding:15px!important}.firstopt b{font-size:17px!important}
+}
+</style>
+<style id="v252-mobile-layout-fix">
+/* V2.5.2 TRUE TWO-COLUMN CUSTOMER EXPERIENCE
+   Intentionally overrides every earlier grid breakpoint. */
+.grid{grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:16px!important}
+.firstopts{grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:14px!important}
+.item{min-height:200px!important;padding:21px!important;border-radius:24px!important}
+.item b{font-size:21px!important;line-height:1.28!important}
+.item .muted{font-size:14px!important;line-height:1.45!important;margin-top:9px!important}
+.price{font-size:22px!important}.add{width:48px!important;height:48px!important;font-size:28px!important}
+.firstopt{min-height:128px!important;padding:18px!important;border-radius:20px!important}.firstopt b{font-size:19px!important}.firstopt small{font-size:14px!important}
+@media(max-width:430px){
+ .wrap{padding-left:14px!important;padding-right:14px!important}.grid{gap:12px!important}
+ .item{min-height:184px!important;padding:17px!important}.item b{font-size:19px!important}.price{font-size:20px!important}.add{width:44px!important;height:44px!important;font-size:26px!important}
+ .firstopts{gap:11px!important}.firstopt{min-height:116px!important;padding:15px!important}.firstopt b{font-size:17px!important}
+}
+</style>
+<script>
+/* JS guard: protects the customer layout from legacy desktop breakpoints. */
+(function(){
+  function forceCustomerColumns(){
+    document.querySelectorAll('.grid').forEach(function(el){el.style.setProperty('grid-template-columns','repeat(2,minmax(0,1fr))','important');});
+    document.querySelectorAll('.firstopts').forEach(function(el){el.style.setProperty('grid-template-columns','repeat(2,minmax(0,1fr))','important');});
+  }
+  forceCustomerColumns();
+  document.addEventListener('DOMContentLoaded',forceCustomerColumns);
+  window.addEventListener('resize',forceCustomerColumns,{passive:true});
+  new MutationObserver(forceCustomerColumns).observe(document.documentElement,{childList:true,subtree:true});
+})();
+</script>
+
+<style id="v260-prestige-portrait-customer">
+/* V2.6: Customer QR is intentionally designed as a portrait-phone experience.
+   Staff/iPad layout remains in Index.html and is not affected. */
+@media (orientation:portrait), (max-width:900px){
+  html{font-size:18px!important} body{font-size:18px!important;line-height:1.45!important;background:#f5f6f8!important}
+  .top{padding:16px 16px!important}.brand{max-width:none!important;gap:12px!important}.brand img{width:56px!important;height:56px!important}.brand b{font-size:20px!important}.brand .muted{font-size:13px!important}
+  .table{font-size:12px!important;padding:10px 12px!important}.carttop{min-height:50px!important;padding:9px 12px!important}.carticon{font-size:21px!important}.cartamount{font-size:15px!important}.cartbadge{min-width:24px!important;height:24px!important;font-size:12px!important}
+  .wrap{max-width:none!important;padding:22px 16px 54px!important}.hero{padding:30px 25px!important;border-radius:28px!important;margin-bottom:20px!important}.hero h1{font-size:36px!important;line-height:1.08!important}.hero p{font-size:17px!important;line-height:1.55!important;margin-top:10px!important}
+  .search{min-height:64px!important;padding:17px 18px!important;font-size:18px!important;border-radius:18px!important}.cats{gap:11px!important;padding:17px 0!important}.chip{min-height:54px!important;padding:14px 19px!important;font-size:17px!important;border-radius:999px!important}
+  .grid{grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:14px!important}.item{min-height:215px!important;padding:22px 19px!important;border-radius:25px!important}.item b{font-size:22px!important;line-height:1.28!important}.item .muted{font-size:15px!important;line-height:1.45!important;margin-top:10px!important}.price{font-size:24px!important}.add{width:52px!important;height:52px!important;font-size:30px!important}
+  .panel{max-height:94dvh!important;padding:28px 18px max(42px,env(safe-area-inset-bottom))!important;border-radius:30px 30px 0 0!important}.panelin{max-width:none!important}.panel h2{font-size:30px!important;line-height:1.2!important}.x{width:48px!important;height:48px!important;font-size:22px!important}.group{padding:20px!important;border-radius:24px!important;margin:16px 0!important}.firstgroup>b{font-size:21px!important}.stepbadge{font-size:12px!important;padding:7px 10px!important}.group .muted{font-size:16px!important;line-height:1.5!important;margin-top:5px!important}
+  .firstopts{grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:13px!important;margin-top:15px!important}.firstopt{min-height:138px!important;padding:20px 17px!important;border-radius:21px!important}.firstopt b{font-size:20px!important;line-height:1.28!important;padding-right:22px!important}.firstopt small{font-size:15px!important;margin-top:10px!important}.firstopt.on:after{width:26px!important;height:26px!important;font-size:14px!important}
+  .addon-accordion{padding:0!important;overflow:hidden!important;background:#fff!important;border:1px solid #e4e7ec!important;box-shadow:0 8px 24px rgba(16,24,40,.05)!important}.addon-head{width:100%;min-height:82px;border:0;background:#fff;padding:18px 19px;display:flex;align-items:center;justify-content:space-between;gap:14px;text-align:left;color:#101828;cursor:pointer}.addon-head-copy{display:flex;flex-direction:column;gap:5px}.addon-head-copy b{font-size:21px!important;line-height:1.25}.addon-head-copy small{font-size:14px;color:#667085;font-weight:700}.addon-chevron{width:38px;height:38px;border-radius:50%;background:#f2f4f7;display:grid;place-items:center;font-size:24px;font-weight:900;transition:transform .2s ease}.addon-body{display:none;border-top:1px solid #eaecf0;padding:5px 18px 12px}.addon-accordion.open .addon-body{display:block}.addon-accordion.open .addon-chevron{transform:rotate(180deg)}.addon-accordion.has-selection .addon-head{background:#f8fbff}.addon-accordion.has-selection{border-color:#84adff!important}
+  .addon-opt{min-height:76px!important;padding:14px 2px!important;font-size:18px!important;gap:13px!important}.addon-opt input{width:26px!important;height:26px!important;flex:0 0 26px}.addon-option-name{font-size:18px!important;font-weight:800}.addon-option-price{margin-left:auto;font-size:16px!important;font-weight:900!important;color:#344054;white-space:nowrap}
+  .qty{gap:18px!important;margin:20px 0!important}.qty button{width:58px!important;height:58px!important;font-size:28px!important;border-radius:16px!important}.qty b{font-size:21px!important}.primary{min-height:66px!important;font-size:19px!important;border-radius:18px!important}.group textarea{font-size:17px!important;min-height:100px!important;padding:15px!important}
+  .orders{margin-top:28px!important}.orders h2{font-size:27px!important}.ordercard{font-size:17px!important;padding:19px!important;border-radius:21px!important}.muted{font-size:14px}
+  .promo h2{font-size:26px!important}.promo p{font-size:17px!important}.promo-copy{padding:21px!important}
+}
+@media (orientation:portrait) and (max-width:390px){
+  html{font-size:17px!important}.wrap{padding-left:12px!important;padding-right:12px!important}.grid{gap:10px!important}.item{min-height:198px!important;padding:18px 15px!important}.item b{font-size:20px!important}.price{font-size:22px!important}.add{width:48px!important;height:48px!important}.hero h1{font-size:32px!important}.firstopts{gap:10px!important}.firstopt{min-height:126px!important;padding:17px 14px!important}.firstopt b{font-size:18px!important}
+}
+</style>
+
+
+<style id="v261-prestige-accessibility">
+/* V2.6.1 - larger portrait customer typography + centered cart */
+@media (max-width:899px){
+  body{font-size:19px!important;line-height:1.5!important}
+  .top{padding:14px 14px!important}.brand{gap:11px!important}.brand img{width:52px!important;height:52px!important}.brand b{font-size:18px!important}.brand .muted{font-size:13px!important}
+  .table{font-size:13px!important}.carttop{min-height:54px!important}.cartamount{font-size:16px!important}.cartlabel{font-size:12px!important}
+  .wrap{padding:20px 14px 52px!important}.hero{padding:28px 22px!important;border-radius:26px!important}.hero h1{font-size:34px!important;line-height:1.12!important}.hero p{font-size:17px!important}
+  .promo-copy{padding:21px!important}.promo-kicker{font-size:12px!important}.promo h2{font-size:25px!important}.promo p{font-size:17px!important}
+  .search{min-height:60px!important;font-size:18px!important;padding:16px 18px!important}.cats{gap:10px!important;padding:15px 0!important}.chip{min-height:50px!important;padding:13px 17px!important;font-size:16px!important}
+  .grid{grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:13px!important}.item{min-height:210px!important;padding:21px 17px!important;border-radius:23px!important}.item b{font-size:21px!important;line-height:1.3!important}.item .muted{font-size:15px!important}.price{font-size:23px!important}.add{width:50px!important;height:50px!important;font-size:28px!important}
+  .orders h2,.orders>h2{font-size:26px!important}.ordercard{font-size:17px!important}.muted{font-size:14px}
+  .panel{font-size:18px!important}.panel h2{font-size:31px!important}.firstgroup>b{font-size:22px!important}.group .muted{font-size:16px!important}.firstopt b{font-size:20px!important}.firstopt small{font-size:15px!important}.addon-head-copy b{font-size:22px!important}.addon-head-copy small{font-size:16px!important}.addon-opt{font-size:19px!important}.addon-option-name{font-size:19px!important}.addon-option-price{font-size:17px!important}.primary{font-size:18px!important;min-height:60px!important}.qty b{font-size:20px!important}
+}
+/* Cart is a true centered modal, not a bottom sheet */
+.sheet.cartmode{align-items:center!important;justify-content:center!important;padding:18px!important;background:rgba(7,12,22,.68)!important;backdrop-filter:blur(14px)!important}
+.sheet.cartmode .panel{width:min(94vw,620px)!important;max-height:min(82dvh,760px)!important;border-radius:30px!important;padding:25px 22px max(28px,env(safe-area-inset-bottom))!important;box-shadow:0 34px 100px rgba(0,0,0,.34)!important;overflow:auto!important}
+.sheet.cartmode .panelin{max-width:none!important;margin:0!important}
+.cart-modal-head{display:flex;align-items:flex-start;justify-content:space-between;gap:16px;margin-bottom:8px}.cart-modal-head h2{margin:3px 0 4px!important;font-size:31px!important}.cart-kicker{font-size:12px;font-weight:950;letter-spacing:.13em;color:#175cd3}.cart-subtitle{font-size:16px;color:#667085;line-height:1.45}.cartline-large{padding:18px 0!important}.cart-row{display:flex;justify-content:space-between;align-items:flex-start;gap:14px}.cart-row b{font-size:19px;line-height:1.35}.remove-btn{border:0;background:#fff1f3;color:#c01048;border-radius:999px;padding:9px 12px;font-size:14px;font-weight:850}.cart-mods{font-size:15px;color:#667085;line-height:1.55;margin-top:8px}.cart-line-total{font-size:19px;font-weight:950;margin-top:9px}.cart-submit{margin-top:20px!important;min-height:62px!important;font-size:18px!important}.empty-cart{padding:40px 5px;text-align:center;font-size:18px;color:#667085}
+@media(max-width:380px){body{font-size:18px!important}.hero h1{font-size:30px!important}.item{min-height:195px!important;padding:17px 14px!important}.item b{font-size:19px!important}.price{font-size:21px!important}.sheet.cartmode{padding:12px!important}.sheet.cartmode .panel{width:100%!important;padding:22px 17px!important}.cart-modal-head h2{font-size:28px!important}}
+</style>
+
+<style id="v283-qr-stable-myorders-top">
+.myorderstop{border:1px solid #d0d5dd;background:#fff;color:#101828;border-radius:14px;min-height:50px;padding:9px 12px;display:flex;align-items:center;gap:7px;font-weight:950;box-shadow:0 6px 18px rgba(16,24,40,.08);cursor:pointer;white-space:nowrap}.ordersicon{font-size:19px}.orderscopy{font-size:13px}.myorderstop:active{transform:scale(.97)}
+.sheet.ordermode{align-items:center!important;justify-content:center!important;padding:18px!important;background:rgba(7,12,22,.68)!important;backdrop-filter:blur(14px)!important}.sheet.ordermode .panel{width:min(94vw,620px)!important;max-height:min(82dvh,760px)!important;border-radius:30px!important;padding:25px 22px max(28px,env(safe-area-inset-bottom))!important;box-shadow:0 34px 100px rgba(0,0,0,.34)!important;overflow:auto!important}.sheet.ordermode .panelin{max-width:none!important;margin:0!important}
+@media(max-width:430px){.brand-actions{gap:5px!important}.myorderstop{min-height:48px;padding:8px 9px;border-radius:12px}.orderscopy{display:none}.ordersicon{font-size:20px}.table{padding-left:8px!important;padding-right:8px!important}.carttop{padding-left:9px!important;padding-right:9px!important}}
+</style>
