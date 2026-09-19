@@ -302,7 +302,16 @@ const LUCKY_API_URL = 'https://script.google.com/macros/s/AKfycbxPvz2iERpCPOp57z
       get(_target,prop){
         if(prop==='withSuccessHandler') return cb=>runner(cb,failure);
         if(prop==='withFailureHandler') return cb=>runner(success,cb);
-        return (...args)=>invoke(prop,args,success,failure);
+        return (...args)=>{
+          // Existing Staff POS uses google.script.run.apiCall('action',[args]).
+          // Unwrap that legacy dispatcher so the HTTP backend receives the real action.
+          if(prop==='apiCall'){
+            const action=args[0];
+            const actionArgs=Array.isArray(args[1])?args[1]:[];
+            return invoke(action,actionArgs,success,failure);
+          }
+          return invoke(prop,args,success,failure);
+        };
       }
     });
   }
