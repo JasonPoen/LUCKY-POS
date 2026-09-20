@@ -266,48 +266,83 @@ body.ipad-view .open-orders-page{padding:18px!important}body.ipad-view .open-ord
 <div id="modal" class="modal-bg"><div class="modal" id="modalBox"><div class="mh"><strong id="mt"></strong><button class="close" onclick="closeM()">×</button></div><div class="mb" id="mb"></div><div class="mf" id="mf"></div></div></div><div id="loader" class="loader"><div class="loader-card"><img class="loader-brand-logo" src="https://raw.githubusercontent.com/JasonPoen/LuckyBowlLogo/refs/heads/main/Logo%20Lucky%20Bowl%20Noodle%20House.png" alt="Lucky Bowl"><div class="spinner" style="width:30px;height:30px;margin-bottom:12px"></div><div class="loader-title">Processing your request</div><div class="loader-sub">Please wait a moment…</div></div></div>
 
 <script id="lucky-github-api-bridge">
-/*
-  LUCKY POS GitHub -> Google Apps Script bridge.
-  AFTER deploying Code.gs as a new Web App version, replace the value below
-  with the deployment's /exec URL in BOTH index.html and customer.html.
-*/
+/* LUCKY POS GitHub Performance V2 */
 const LUCKY_API_URL = 'https://script.google.com/macros/s/AKfycbxPvz2iERpCPOp57zcL5wHL-Hb9KR_achpVuDqZv4MQocgoPnW8YBBqxRKUnq9jIjAw/exec';
 
 (function(){
-  function invoke(fn,args,success,failure){
-    if(!LUCKY_API_URL || LUCKY_API_URL.indexOf('PASTE_')===0){
-      const e=new Error('LUCKY API URL has not been configured yet.');
-      if(failure) failure(e);
-      return;
-    }
-    fetch(LUCKY_API_URL,{
-      method:'POST',
-      redirect:'follow',
-      headers:{'Content-Type':'text/plain;charset=utf-8'},
-      body:JSON.stringify({api:'pos',fn:String(fn||''),args:Array.isArray(args)?args:[]})
-    })
-    .then(r=>r.text())
-    .then(t=>{
+  const inflight=new Map();
+  const READ_ONLY=new Set([
+    'bootstrapPOS','getAppData','pingPOS','getDashboardData','getSalesHistory',
+    'getOrderDetails','getOpenOrders','getOrderHistory','getReceiptData',
+    'getTableManagementData','getPrintBridgeSetup','getPrintBridgeStatus',
+    'getInventoryData','getVoucherManagementData','validateVoucher',
+    'getTableQrLinks','getCustomers','findCustomerByPhone','getCustomerDetails',
+    'customerBootstrap','customerMyOrders'
+  ]);
+
+  function sleep(ms){return new Promise(r=>setTimeout(r,ms));}
+  function keyOf(fn,args){try{return fn+'|'+JSON.stringify(args||[])}catch(_){return fn+'|'+Date.now()}}
+
+  async function postOnce(fn,args,timeoutMs){
+    const ctrl=new AbortController();
+    const timer=setTimeout(()=>ctrl.abort(),timeoutMs);
+    try{
+      const r=await fetch(LUCKY_API_URL,{
+        method:'POST',
+        redirect:'follow',
+        cache:'no-store',
+        headers:{'Content-Type':'text/plain;charset=utf-8'},
+        body:JSON.stringify({api:'pos',fn:String(fn||''),args:Array.isArray(args)?args:[]}),
+        signal:ctrl.signal
+      });
+      const t=await r.text();
       let data;
-      try{ data=JSON.parse(t); }
-      catch(_){ throw new Error('Server returned an invalid response.'); }
-      if(!data || data.ok!==true) throw new Error((data&&data.error)||'LUCKY POS API request failed.');
-      if(success) success(data.result);
-    })
-    .catch(err=>{ if(failure) failure(err); });
+      try{data=JSON.parse(t)}catch(_){throw new Error('Server returned an invalid response.')}
+      if(!data||data.ok!==true)throw new Error((data&&data.error)||'LUCKY POS API request failed.');
+      return data.result;
+    }finally{clearTimeout(timer)}
+  }
+
+  async function request(fn,args){
+    if(!LUCKY_API_URL || LUCKY_API_URL.indexOf('PASTE_')===0)
+      throw new Error('LUCKY API URL has not been configured yet.');
+
+    const readOnly=READ_ONLY.has(fn);
+    const k=keyOf(fn,args);
+    if(readOnly && inflight.has(k)) return inflight.get(k);
+
+    const task=(async()=>{
+      const timeout=(fn==='login'?55000:(fn==='bootstrapPOS'?70000:50000));
+      const tries=readOnly?2:1;
+      let last;
+      for(let i=0;i<tries;i++){
+        try{return await postOnce(fn,args,timeout)}
+        catch(e){
+          last=e;
+          if(i+1<tries) await sleep(650);
+        }
+      }
+      if(last && last.name==='AbortError') throw new Error('Server response is taking too long. Please try again.');
+      throw last;
+    })();
+
+    if(readOnly) inflight.set(k,task);
+    try{return await task}
+    finally{if(readOnly) inflight.delete(k)}
+  }
+
+  function invoke(fn,args,success,failure){
+    request(fn,args).then(r=>{if(success)success(r)}).catch(e=>{if(failure)failure(e)});
   }
 
   function runner(success,failure){
     return new Proxy({},{
       get(_target,prop){
-        if(prop==='withSuccessHandler') return cb=>runner(cb,failure);
-        if(prop==='withFailureHandler') return cb=>runner(success,cb);
+        if(prop==='withSuccessHandler')return cb=>runner(cb,failure);
+        if(prop==='withFailureHandler')return cb=>runner(success,cb);
         return (...args)=>{
-          // Existing Staff POS uses google.script.run.apiCall('action',[args]).
-          // Unwrap that legacy dispatcher so the HTTP backend receives the real action.
           if(prop==='apiCall'){
-            const action=args[0];
-            const actionArgs=Array.isArray(args[1])?args[1]:[];
+            const action=args[0], actionArgs=Array.isArray(args[1])?args[1]:[];
             return invoke(action,actionArgs,success,failure);
           }
           return invoke(prop,args,success,failure);
@@ -316,12 +351,9 @@ const LUCKY_API_URL = 'https://script.google.com/macros/s/AKfycbxPvz2iERpCPOp57z
     });
   }
 
-  window.google = window.google || {};
-  window.google.script = window.google.script || {};
-  Object.defineProperty(window.google.script,'run',{
-    configurable:true,
-    get(){ return runner(null,null); }
-  });
+  window.google=window.google||{};
+  window.google.script=window.google.script||{};
+  Object.defineProperty(window.google.script,'run',{configurable:true,get(){return runner(null,null)}});
 })();
 </script>
 
@@ -925,8 +957,8 @@ setInterval(ensureOrderMemberChip,500);
     status('Connecting to LUCKY POS server…','working');
     var timedOut=false;
     var timer=setTimeout(function(){
-      timedOut=true;unlock();status('No server response after 25 seconds. Please deploy this exact version as a NEW Web App version and refresh the /exec page.','bad');
-    },25000);
+      timedOut=true;unlock();status('Server is taking longer than usual. Please wait or try Sign In again.','bad');
+    },60000);
     try{
       google.script.run
         .withSuccessHandler(function(r){
@@ -964,4 +996,15 @@ setInterval(ensureOrderMemberChip,500);
   else bind();
 })();
 </script>
+
+<script id="lucky-performance-warmup">
+window.addEventListener('DOMContentLoaded',function(){
+  setTimeout(function(){
+    try{
+      google.script.run.withSuccessHandler(function(){}).withFailureHandler(function(){}).apiCall('pingPOS',[]);
+    }catch(_){}
+  },250);
+});
+</script>
+
 </body></html>
