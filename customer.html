@@ -51,48 +51,83 @@
 
 </head><body><div id="loader" class="loader">Loading menu…</div><header class="top"><div class="brand"><img id="logo"><div><b id="rn">Lucky Bowl</b><div class="muted">Self Ordering</div></div><div class="brand-actions"><span id="tn" class="table">TABLE</span><button class="myorderstop" onclick="openMyOrders()" aria-label="Open my orders"><span class="ordersicon">☰</span><span class="orderscopy">My Orders</span></button><button class="carttop" onclick="openCart()" aria-label="Open cart"><span class="carticon">🛒</span><span class="cartcopy"><span class="cartlabel">Cart</span><span id="ct" class="cartamount">RM 0.00</span></span><span id="cc" class="cartbadge">0</span></button></div></div></header><main id="app" class="wrap"></main><div id="sheet" class="sheet"><div class="panel"><div id="panel" class="panelin"></div></div></div><div id="customerDialog" class="customer-dialog"><div id="customerDialogCard" class="customer-dialog-card"></div></div><div id="submitOverlay" class="submit-overlay"><div id="submitCard" class="submit-card"></div></div>
 <script id="lucky-github-api-bridge">
-/*
-  LUCKY POS GitHub -> Google Apps Script bridge.
-  AFTER deploying Code.gs as a new Web App version, replace the value below
-  with the deployment's /exec URL in BOTH index.html and customer.html.
-*/
+/* LUCKY POS GitHub Performance V2 */
 const LUCKY_API_URL = 'https://script.google.com/macros/s/AKfycbxPvz2iERpCPOp57zcL5wHL-Hb9KR_achpVuDqZv4MQocgoPnW8YBBqxRKUnq9jIjAw/exec';
 
 (function(){
-  function invoke(fn,args,success,failure){
-    if(!LUCKY_API_URL || LUCKY_API_URL.indexOf('PASTE_')===0){
-      const e=new Error('LUCKY API URL has not been configured yet.');
-      if(failure) failure(e);
-      return;
-    }
-    fetch(LUCKY_API_URL,{
-      method:'POST',
-      redirect:'follow',
-      headers:{'Content-Type':'text/plain;charset=utf-8'},
-      body:JSON.stringify({api:'pos',fn:String(fn||''),args:Array.isArray(args)?args:[]})
-    })
-    .then(r=>r.text())
-    .then(t=>{
+  const inflight=new Map();
+  const READ_ONLY=new Set([
+    'bootstrapPOS','getAppData','pingPOS','getDashboardData','getSalesHistory',
+    'getOrderDetails','getOpenOrders','getOrderHistory','getReceiptData',
+    'getTableManagementData','getPrintBridgeSetup','getPrintBridgeStatus',
+    'getInventoryData','getVoucherManagementData','validateVoucher',
+    'getTableQrLinks','getCustomers','findCustomerByPhone','getCustomerDetails',
+    'customerBootstrap','customerMyOrders'
+  ]);
+
+  function sleep(ms){return new Promise(r=>setTimeout(r,ms));}
+  function keyOf(fn,args){try{return fn+'|'+JSON.stringify(args||[])}catch(_){return fn+'|'+Date.now()}}
+
+  async function postOnce(fn,args,timeoutMs){
+    const ctrl=new AbortController();
+    const timer=setTimeout(()=>ctrl.abort(),timeoutMs);
+    try{
+      const r=await fetch(LUCKY_API_URL,{
+        method:'POST',
+        redirect:'follow',
+        cache:'no-store',
+        headers:{'Content-Type':'text/plain;charset=utf-8'},
+        body:JSON.stringify({api:'pos',fn:String(fn||''),args:Array.isArray(args)?args:[]}),
+        signal:ctrl.signal
+      });
+      const t=await r.text();
       let data;
-      try{ data=JSON.parse(t); }
-      catch(_){ throw new Error('Server returned an invalid response.'); }
-      if(!data || data.ok!==true) throw new Error((data&&data.error)||'LUCKY POS API request failed.');
-      if(success) success(data.result);
-    })
-    .catch(err=>{ if(failure) failure(err); });
+      try{data=JSON.parse(t)}catch(_){throw new Error('Server returned an invalid response.')}
+      if(!data||data.ok!==true)throw new Error((data&&data.error)||'LUCKY POS API request failed.');
+      return data.result;
+    }finally{clearTimeout(timer)}
+  }
+
+  async function request(fn,args){
+    if(!LUCKY_API_URL || LUCKY_API_URL.indexOf('PASTE_')===0)
+      throw new Error('LUCKY API URL has not been configured yet.');
+
+    const readOnly=READ_ONLY.has(fn);
+    const k=keyOf(fn,args);
+    if(readOnly && inflight.has(k)) return inflight.get(k);
+
+    const task=(async()=>{
+      const timeout=(fn==='login'?55000:(fn==='bootstrapPOS'?70000:50000));
+      const tries=readOnly?2:1;
+      let last;
+      for(let i=0;i<tries;i++){
+        try{return await postOnce(fn,args,timeout)}
+        catch(e){
+          last=e;
+          if(i+1<tries) await sleep(650);
+        }
+      }
+      if(last && last.name==='AbortError') throw new Error('Server response is taking too long. Please try again.');
+      throw last;
+    })();
+
+    if(readOnly) inflight.set(k,task);
+    try{return await task}
+    finally{if(readOnly) inflight.delete(k)}
+  }
+
+  function invoke(fn,args,success,failure){
+    request(fn,args).then(r=>{if(success)success(r)}).catch(e=>{if(failure)failure(e)});
   }
 
   function runner(success,failure){
     return new Proxy({},{
       get(_target,prop){
-        if(prop==='withSuccessHandler') return cb=>runner(cb,failure);
-        if(prop==='withFailureHandler') return cb=>runner(success,cb);
+        if(prop==='withSuccessHandler')return cb=>runner(cb,failure);
+        if(prop==='withFailureHandler')return cb=>runner(success,cb);
         return (...args)=>{
-          // Existing Staff POS uses google.script.run.apiCall('action',[args]).
-          // Unwrap that legacy dispatcher so the HTTP backend receives the real action.
           if(prop==='apiCall'){
-            const action=args[0];
-            const actionArgs=Array.isArray(args[1])?args[1]:[];
+            const action=args[0], actionArgs=Array.isArray(args[1])?args[1]:[];
             return invoke(action,actionArgs,success,failure);
           }
           return invoke(prop,args,success,failure);
@@ -101,12 +136,9 @@ const LUCKY_API_URL = 'https://script.google.com/macros/s/AKfycbxPvz2iERpCPOp57z
     });
   }
 
-  window.google = window.google || {};
-  window.google.script = window.google.script || {};
-  Object.defineProperty(window.google.script,'run',{
-    configurable:true,
-    get(){ return runner(null,null); }
-  });
+  window.google=window.google||{};
+  window.google.script=window.google.script||{};
+  Object.defineProperty(window.google.script,'run',{configurable:true,get(){return runner(null,null)}});
 })();
 </script>
 
@@ -203,7 +235,18 @@ function openMyOrders(){
 function submit(){if(!cart.length)return;const btn=panel.querySelector('.primary');btn.disabled=true;btn.textContent='Sending…';call('customerSubmitOrder',[TABLE,Q,D.sessionId,{items:cart}],r=>{cart=[];syncCart();D.myOrders=r.myOrders||[];closeSheet();submitCard.innerHTML=`<div class="tick">✓</div><h2>Order Submitted</h2><p class="muted" style="font-size:14px">${esc(r.orderNo)} has been sent successfully.</p><div class="submit-poem">Your order is in good hands.<br>Your food is on its way — made with care, just for your table.</div><button class="primary" onclick="submitOverlay.classList.remove('on')">Continue Ordering</button>`;submitOverlay.classList.add('on')})}
 function renderOrders(a){const el=$('myorders');if(!el)return;el.innerHTML=a.length?a.map(o=>`<div class="ordercard"><div style="display:flex;justify-content:space-between"><b>${esc(o.orderNo)}</b><span class="muted">${esc(o.status)}</span></div>${o.items.map(i=>`<div style="display:flex;justify-content:space-between;margin-top:10px"><span>${i.qty} × ${esc(i.name)}</span><b>RM ${money(i.lineTotal)}</b></div>`).join('')}<div style="border-top:1px solid #eaecf0;margin-top:12px;padding-top:10px;text-align:right;font-weight:950">RM ${money(o.total)}</div></div>`).join(''):'<div class="muted">No orders submitted yet.</div>'}
 setInterval(()=>{if(!D)return;call('customerMyOrders',[TABLE,Q,D.sessionId],r=>{if(r.closed){app.innerHTML='<div class="closed"><h1>Thank you</h1><p class="muted">This dining session has been closed after payment.</p></div>';bottom.style.display='none'}else{D.myOrders=r.orders||[];renderOrders(D.myOrders)}})},15000);
-</script></body></html><style>
+</script>
+<script id="lucky-performance-warmup">
+window.addEventListener('DOMContentLoaded',function(){
+  setTimeout(function(){
+    try{
+      google.script.run.withSuccessHandler(function(){}).withFailureHandler(function(){}).apiCall('pingPOS',[]);
+    }catch(_){}
+  },250);
+});
+</script>
+
+</body></html><style>
 /* V2.5.1 LARGE MOBILE QR EXPERIENCE */
 @media (max-width: 820px){
   .top{padding:14px 14px}.brand{gap:10px}.brand img{width:48px;height:48px}.brand b{font-size:17px}.brand .muted{font-size:11px}
