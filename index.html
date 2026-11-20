@@ -243,7 +243,25 @@ body.ipad-view .open-orders-page{padding:18px!important}body.ipad-view .open-ord
 @media(max-width:760px){.product-image-editor{grid-template-columns:1fr}.product-image-preview{height:190px}}
 </style>
 </head><body>
-<div id="login" class="login"><div class="login-card"><img class="brand-logo login-brand-logo" src="https://raw.githubusercontent.com/JasonPoen/LuckyBowlLogo/refs/heads/main/Logo%20Lucky%20Bowl%20Noodle%20House.png" alt="Lucky Bowl Noodle House"><div class="logo" style="text-align:center">LUCKY POS</div><p class="muted">Secure staff access</p><input id="uid" placeholder="User ID" autocomplete="username"><input id="pin" type="password" placeholder="PIN" autocomplete="current-password"><button id="signInBtn" type="button" class="btn btn-green">Sign In</button><div class="login-pin-actions"><button type="button" class="login-link-btn" onclick="openChangePinLogin()">Change PIN</button><span>•</span><button type="button" class="login-link-btn" onclick="openForgotPinLogin()">Forgot PIN?</button></div><div id="loginStatus" class="login-status">Ready to sign in</div><p class="muted" style="font-size:12px;margin-top:18px">Secure PIN management enabled</p></div></div>
+<script id="lucky-github-api-bridge">
+/* LUCKY POS V18.4 GitHub Pages -> Apps Script API bridge */
+const LUCKY_API_URL = 'PASTE_YOUR_GOOGLE_APPS_SCRIPT_EXEC_URL_HERE';
+(function(){
+  function invoke(fn,args,success,failure){
+    if(!LUCKY_API_URL || LUCKY_API_URL.indexOf('PASTE_')===0){
+      const e=new Error('Please configure LUCKY_API_URL with your Apps Script /exec URL in index.html.');
+      if(failure)failure(e); return;
+    }
+    fetch(LUCKY_API_URL,{method:'POST',redirect:'follow',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify({api:'pos',fn:String(fn||''),args:Array.isArray(args)?args:[]})})
+      .then(r=>r.text()).then(t=>{let d;try{d=JSON.parse(t)}catch(_){throw new Error('Server returned an invalid response.')}if(!d||d.ok!==true)throw new Error((d&&d.error)||'LUCKY POS API request failed.');if(success)success(d.result);})
+      .catch(e=>{if(failure)failure(e)});
+  }
+  function runner(success,failure){return new Proxy({},{get(_t,prop){if(prop==='withSuccessHandler')return cb=>runner(cb,failure);if(prop==='withFailureHandler')return cb=>runner(success,cb);return(...args)=>{if(prop==='apiCall')return invoke(args[0],Array.isArray(args[1])?args[1]:[],success,failure);return invoke(prop,args,success,failure)}}})}
+  window.google=window.google||{};window.google.script=window.google.script||{};Object.defineProperty(window.google.script,'run',{configurable:true,get(){return runner(null,null)}});
+})();
+</script>
+
+<div id="login" class="login"><div class="login-card"><img class="brand-logo login-brand-logo" src="https://raw.githubusercontent.com/JasonPoen/LuckyBowlLogo/refs/heads/main/Logo%20Lucky%20Bowl%20Noodle%20House.png" alt="Lucky Bowl Noodle House"><div class="logo" style="text-align:center">LUCKY POS</div><p class="muted">Secure staff access</p><input id="uid" placeholder="User ID" autocomplete="username"><input id="pin" type="password" placeholder="PIN" autocomplete="current-password"><button id="signInBtn" type="button" class="btn btn-green">Sign In</button><div class="login-pin-actions"><button type="button" class="login-link-btn" onclick="openResetPinLogin()">Reset PIN</button></div><div id="loginStatus" class="login-status">Ready to sign in</div><p class="muted" style="font-size:12px;margin-top:18px">Secure PIN management enabled</p></div></div>
 <div id="app" class="shell hidden"><aside class="sidebar"><img class="brand-logo sidebar-brand-logo" src="https://raw.githubusercontent.com/JasonPoen/LuckyBowlLogo/refs/heads/main/Logo%20Lucky%20Bowl%20Noodle%20House.png" alt="Lucky Bowl"><div class="brand" style="text-align:center">LUCKY POS</div><div style="padding:0 10px 14px;font-size:10px;color:#667085;font-weight:900;letter-spacing:1.4px">VERSION 1.1 PRESTIGE</div><button class="nav admin-only" data-page="dashboard" onclick="go('dashboard',this)">◈ <span>Dashboard</span></button><button class="nav active" data-page="pos" onclick="go('pos',this)">▦ <span>Point of Sale</span></button><button class="nav" data-page="orders" onclick="go('orders',this)">◫ <span>Open Orders</span></button><button class="nav" data-page="history" onclick="go('history',this)">◷ <span>Order History</span></button><div class="nav-sep admin-only">MANAGEMENT</div><button class="nav admin-only" data-page="categories" onclick="go('categories',this)">▦ <span>Categories</span></button><button class="nav admin-only" data-page="products" onclick="go('products',this)">◇ <span>Products</span></button><button class="nav admin-only" data-page="addons" onclick="go('addons',this)">＋ <span>Add-ons</span></button><button class="nav admin-only" data-page="vouchers" onclick="go('vouchers',this)">▥ <span>Vouchers</span></button><button class="nav admin-only" data-page="customers" onclick="go('customers',this)">♙ <span>Customers</span></button><button class="nav admin-only" data-page="inventory" onclick="go('inventory',this)">▤ <span>Inventory</span></button><button class="nav admin-only" data-page="tables" onclick="go('tables',this)">▦ <span>Tables</span></button><button class="nav admin-only" data-page="printers" onclick="go('printers',this)">▣ <span>Printers</span></button><button class="nav admin-only" data-page="users" onclick="go('users',this)">♙ <span>Users</span></button><button class="nav admin-only" data-page="settings" onclick="go('settings',this)">⚙ <span>Settings</span></button><div class="userbox"><div class="uname" id="who"></div><small id="role" class="muted"></small><br><button class="nav" onclick="signOut()">↪ <span>Sign Out</span></button></div></aside><main class="content"><div id="operationBar" class="operation-bar"><img src="https://raw.githubusercontent.com/JasonPoen/LuckyBowlLogo/refs/heads/main/Logo%20Lucky%20Bowl%20Noodle%20House.png" alt="Lucky Bowl"><div class="operation-brand">LUCKY POS</div><button class="operation-nav" data-op-page="pos" onclick="operationGo('pos')">Point of Sale</button><button class="operation-nav" data-op-page="orders" onclick="operationGo('orders')">Open Orders</button><button class="operation-nav" data-op-page="history" onclick="operationGo('history')">Order History</button><div class="operation-spacer"></div><span id="operationUser" style="font-size:12px;color:#aeb8ca"></span><button id="operationExit" class="operation-exit" onclick="exitOperationMode()">Exit POS Mode</button></div><header class="top"><img class="brand-logo top-brand-logo" src="https://raw.githubusercontent.com/JasonPoen/LuckyBowlLogo/refs/heads/main/Logo%20Lucky%20Bowl%20Noodle%20House.png" alt="Lucky Bowl"><h2 id="title">Point of Sale</h2><div class="top-right"><button id="focusModeBtn" class="btn btn-dark admin-only" onclick="enterOperationMode(false)">Enter POS Mode</button><div class="view-switch" aria-label="Display mode"><button id="desktopViewBtn" type="button" onclick="setViewMode('desktop')">Desktop</button><button id="ipadViewBtn" type="button" onclick="setViewMode('ipad')">iPad</button></div><span id="clock" class="muted"></span></div></header>
 <section id="p-dashboard" class="page"><div class="section-head"><div><h1>Executive Dashboard</h1><div class="muted">Live business performance and operational overview</div></div><button class="btn btn-soft" onclick="loadDashboard()">Refresh</button></div><div id="dashMetrics" class="dash-grid"></div><div class="dash-panels"><div class="panel"><h3>Sales by Hour</h3><div id="salesBars" class="bars"></div></div><div class="panel"><h3>Top Selling Items</h3><div id="topItems"></div></div></div><div class="dash-panels"><div class="panel"><h3>Payment Mix</h3><div id="paymentMix"></div></div><div class="panel"><h3>Recent Transactions</h3><div id="recentTx"></div></div></div></section>
 <section id="p-history" class="page"><div class="section-head"><div><h1>Order History</h1><div class="muted">Search receipts, orders and payment records</div></div></div><div class="history-tools"><input id="hf" type="date"><input id="ht" type="date"><select id="hm"><option value="ALL">All Payments</option><option>CASH</option><option>CARD</option><option>DUITNOW_QR</option><option>EWALLET</option></select><input id="hs" placeholder="Receipt / Order / Table / Staff"><button class="btn btn-dark" onclick="loadHistory()">Search</button></div><table class="table"><thead><tr><th>DATE / TIME</th><th>RECEIPT</th><th>ORDER</th><th>TABLE / TYPE</th><th>PAYMENT</th><th>STAFF</th><th style="text-align:right">TOTAL</th><th></th></tr></thead><tbody id="historyRows"></tbody></table></section>
@@ -846,88 +864,17 @@ setInterval(ensureOrderMemberChip,500);
 <div id="buildBadge" style="position:fixed;left:14px;bottom:10px;font:600 10px/1.2 Inter,Segoe UI,sans-serif;color:#94a3b8;z-index:20;pointer-events:none">LUCKY POS V18.3 PRESTIGE</div>
 <div style="position:fixed;right:12px;bottom:8px;font:700 9px/1.2 Inter,Segoe UI,sans-serif;color:#94a3b8;z-index:19;pointer-events:none">LUCKY POS V18.3 · SECURE PIN MANAGEMENT</div>
 <script id="v183-login-pin-management">
-function openChangePinLogin(){
-  const pre=(document.getElementById('uid')||{}).value||'';
-  modal('Change PIN',`<div class="pin-security-note"><b>Secure PIN Change</b><br>Enter your current PIN before choosing a new PIN. All existing sessions for this User ID will be signed out after the change.</div><div class="field"><label>USER ID</label><input id="cpUser" autocomplete="username" value="${esc(pre)}"></div><div class="field"><label>CURRENT PIN</label><input id="cpOld" type="password" autocomplete="current-password"></div><div class="field"><label>NEW PIN</label><input id="cpNew" type="password" autocomplete="new-password"></div><div class="field"><label>CONFIRM NEW PIN</label><input id="cpConfirm" type="password" autocomplete="new-password"></div>`,[['Cancel','soft',closeM],['Change PIN','dark',submitChangePinLogin]],'wide');
+function openResetPinLogin(){
+  const pre=String((document.getElementById('uid')&&document.getElementById('uid').value)||'').trim();
+  modal('Reset PIN',`<div class="pin-security-note"><b>Reset forgotten PIN</b><br>No current PIN is required. Enter the User ID and choose a new PIN. Existing sessions for this User ID will be signed out.</div><div class="field"><label>USER ID</label><input id="rpUser" autocomplete="username" value="${esc(pre)}"></div><div class="field"><label>NEW PIN</label><input id="rpNew" type="password" autocomplete="new-password"></div><div class="field"><label>CONFIRM NEW PIN</label><input id="rpConfirm" type="password" autocomplete="new-password"></div><div class="noticebox" style="margin-top:12px"><b>Security notice</b><br><span class="muted">This recovery mode does not require the old PIN.</span></div>`,[['Cancel','soft',closeM],['Reset PIN','dark',submitResetPinLogin]],'wide');
 }
-function submitChangePinLogin(){
-  const uid=cpUser.value.trim(),oldPin=cpOld.value,newPin=cpNew.value,confirm=cpConfirm.value;
-  if(!uid||!oldPin||!newPin||!confirm)return notice('Check Details','Please complete all PIN fields.','warning');
-  if(newPin!==confirm)return notice('PIN Mismatch','New PIN and confirmation do not match.','warning');
-  if(newPin.length<4)return notice('PIN Too Short','Use at least 4 characters for the new PIN.','warning');
-  run('changePinBeforeLogin',[uid,oldPin,newPin],r=>{closeM();document.getElementById('uid').value=uid;document.getElementById('pin').value='';notice('PIN Changed',(r&&r.message)||'Your PIN has been changed. Sign in with the new PIN.','success')},true,msg=>notice('Unable to Change PIN',msg,'error'));
+function submitResetPinLogin(){
+  const uid=String((document.getElementById('rpUser')||{}).value||'').trim();
+  const newPin=String((document.getElementById('rpNew')||{}).value||'');
+  const confirm=String((document.getElementById('rpConfirm')||{}).value||'');
+  if(!uid||!newPin||!confirm)return notice('Check Details','Please enter User ID, New PIN and Confirm New PIN.','warning');
+  if(newPin.length<4)return notice('PIN Too Short','New PIN must contain at least 4 characters.','warning');
+  if(newPin!==confirm)return notice('PIN Mismatch','New PIN and Confirm New PIN do not match.','warning');
+  run('resetPinBeforeLogin',[uid,newPin],r=>{closeM();document.getElementById('uid').value=uid;document.getElementById('pin').value='';notice('PIN Reset',(r&&r.message)||'PIN reset successfully. Sign in with your new PIN.','success')},true,msg=>notice('Reset Failed',msg,'error'));
 }
-function openForgotPinLogin(){
-  const pre=(document.getElementById('uid')||{}).value||'';
-  modal('Forgot PIN · Admin Reset',`<div class="pin-security-note"><b>Administrator verification required</b><br>For security, a forgotten PIN cannot be revealed. An active ADMIN account must authorize a new PIN for the target user.</div><div class="field"><label>TARGET USER ID</label><input id="frTarget" value="${esc(pre)}"></div><div class="field"><label>ADMIN USER ID</label><input id="frAdmin" autocomplete="username"></div><div class="field"><label>ADMIN PIN</label><input id="frAdminPin" type="password" autocomplete="current-password"></div><div class="field"><label>NEW PIN FOR TARGET USER</label><input id="frNew" type="password" autocomplete="new-password"></div><div class="field"><label>CONFIRM NEW PIN</label><input id="frConfirm" type="password" autocomplete="new-password"></div>`,[['Cancel','soft',closeM],['Reset PIN','dark',submitForgotPinLogin]],'wide');
-}
-function submitForgotPinLogin(){
-  const target=frTarget.value.trim(),admin=frAdmin.value.trim(),adminPin=frAdminPin.value,newPin=frNew.value,confirm=frConfirm.value;
-  if(!target||!admin||!adminPin||!newPin||!confirm)return notice('Check Details','Please complete all reset fields.','warning');
-  if(newPin!==confirm)return notice('PIN Mismatch','New PIN and confirmation do not match.','warning');
-  if(newPin.length<4)return notice('PIN Too Short','Use at least 4 characters for the new PIN.','warning');
-  run('adminResetPinBeforeLogin',[target,admin,adminPin,newPin],r=>{closeM();document.getElementById('uid').value=target;document.getElementById('pin').value='';notice('PIN Reset',(r&&r.message)||'The PIN has been reset.','success')},true,msg=>notice('Reset Failed',msg,'error'));
-}
-</script>
-<script id="v299-hardened-login">
-(function(){
-  function status(msg,kind){
-    var el=document.getElementById('loginStatus');
-    if(!el)return;
-    el.textContent=msg||'';
-    el.className='login-status '+(kind||'');
-  }
-  function unlock(){
-    var b=document.getElementById('signInBtn');
-    if(b){b.disabled=false;b.textContent='Sign In';}
-  }
-  function hardenedLogin(){
-    var b=document.getElementById('signInBtn');
-    var u=document.getElementById('uid');
-    var p=document.getElementById('pin');
-    var userId=u?u.value.trim():'', pin=p?p.value:'';
-    if(!userId||!pin){status('Please enter User ID and PIN.','bad');return;}
-    if(b){b.disabled=true;b.textContent='Signing in…';}
-    status('Connecting to LUCKY POS server…','working');
-    var timedOut=false;
-    var timer=setTimeout(function(){
-      timedOut=true;unlock();status('No server response after 25 seconds. Please deploy this exact version as a NEW Web App version and refresh the /exec page.','bad');
-    },25000);
-    try{
-      google.script.run
-        .withSuccessHandler(function(r){
-          if(timedOut)return;
-          clearTimeout(timer);
-          if(!r||!r.token){unlock();status('Login returned no session token.','bad');return;}
-          status('Login successful. Opening LUCKY POS…','good');
-          token=r.token;
-          try{localStorage.setItem('posToken',r.token);}catch(_){}
-          // Do not reload the Apps Script iframe/web-app after authentication.
-          // Continue in the same document so the authenticated session flows
-          // directly into bootstrapPOS and the POS workspace.
-          setTimeout(function(){boot(true);},80);
-        })
-        .withFailureHandler(function(e){
-          if(timedOut)return;
-          clearTimeout(timer);unlock();
-          status((e&&e.message)?e.message:String(e||'Unable to sign in.'),'bad');
-        })
-        .apiCall('login',[userId,pin]);
-    }catch(e){
-      if(timedOut)return;
-      clearTimeout(timer);unlock();status(e.message||String(e),'bad');
-    }
-  }
-  function bind(){
-    var b=document.getElementById('signInBtn'),p=document.getElementById('pin'),u=document.getElementById('uid');
-    if(!b)return;
-    b.onclick=null;
-    b.addEventListener('click',hardenedLogin);
-    [u,p].forEach(function(x){if(x)x.addEventListener('keydown',function(e){if(e.key==='Enter'){e.preventDefault();hardenedLogin();}})});
-    status('Ready to sign in','');
-  }
-  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',bind);
-  else bind();
-})();
-</script>
-</body></html>
+
